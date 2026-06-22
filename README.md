@@ -52,13 +52,13 @@
 ## Issues
 
 - 조회 쿼리의 전체 수행 시간 30배 향상
-  > [자세히 보기: [https://github.com/koo995/portfolio/blob/main/src/nutri-diary/query/README.md](https://github.com/koo995/portfolio/blob/main/src/nutri-diary/query/README.md)]
+  > [자세히 보기: [https://ninekoo9.github.io/posts/mysql-left-join-to-subquery-optimization/](https://ninekoo9.github.io/posts/mysql-left-join-to-subquery-optimization/)]
   
   기존 쿼리 수행 시 약 3~4초가 소요되는 것을 확인. 실행 계획을 분석하여 문제점을 파악한 후, 쿼리 구조를 변경.
   그 결과, 쿼리의 수행 시간이 약 0.08초로 줄어들어 30배 이상의 성능 향상을 달성.
     
 - Spring Data JDBC(또는 JPA)에서 DB 엔진에 따른 데이터 타입의 변환 차이 이슈
-  >[자세히 보기: [https://github.com/koo995/portfolio/blob/main/src/nutri-diary/converter/README.md](https://github.com/koo995/portfolio/blob/main/src/nutri-diary/converter/README.md)]
+  >[자세히 보기: [https://ninekoo9.github.io/posts/h2-json-column-converter-error/](https://ninekoo9.github.io/posts/h2-json-column-converter-error/)]
 
   테스트 코드 실행 시 JSON 타입 컬럼값을 객체로 변환하지 못하는 문제가 발생. 상황을 구체적으로 파악하기 위해 Data JPA, Data JDBC, MySQL, H2를 각각 테스트한 결과, JPA에서도 유사한 문제가 발생.
 
@@ -67,17 +67,9 @@
   임시로 해결을 위한 여러 방안을 검토하며 테스트용 컨버터를 만들거나 JSON 타입 대신 TEXT 타입을 사용하는 방법을 고려했고, 최종적으로 TestContainers를 도입하여 해결.
 
   JPA를 사용하는 경우 hypersistence-utils 라이브러리가 문제를 해결. 
-    
-- 단순한 비즈니스 로직의 과도한 복잡성을 개선하여 간결한 구조로 리팩터링
-  > [자세히 보기: [https://github.com/f-lab-edu/nutri-diary/wiki/영양성분-계산-로직-리팩터링](https://github.com/f-lab-edu/nutri-diary/wiki/%EC%98%81%EC%96%91%EC%84%B1%EB%B6%84-%EA%B3%84%EC%82%B0-%EB%A1%9C%EC%A7%81-%EB%A6%AC%ED%8C%A9%ED%84%B0%EB%A7%81)]
-  
-  기존에는 비즈니스 로직을 전략 패턴과 팩토리 패턴을 적용하여 구현. 하지만 코드 리뷰를 통해 이 접근 방식이 비즈니스 로직을 이해하기 어렵게 만들고, 요구사항에 비해 복잡하다는 피드백을 받음.
-  
-  총 3번의 리팩터링을 거쳐, 공통 부분을 추상화하고 Value Object를 생성. 이를 통해 11개의 클래스와 340줄의 코드를 5개의 클래스와 235줄의 코드로 줄여 더 간결하고 이해하기 쉬운 구조로 개선.
 
 ## NCP를 이용한 인프라 구성 과정
-  * [Auto Scaling구성과 LoadBalance연결](https://medium.com/@gunhong951/ncp-naver-cloud-platform-%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%9D%B8%ED%94%84%EB%9D%BC-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0-1%ED%8E%B8-auto-scaling%EA%B3%BC-load-balancer-%EA%B5%AC%EC%84%B1-117de2df73c2)
-  * [Jenkins와 SourceDeploy을 이용한 CI/CD와 무중단 배포](https://medium.com/@gunhong951/ncp-naver-cloud-platform-%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%9D%B8%ED%94%84%EB%9D%BC-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0-2%ED%8E%B8-jenkins%EC%99%80-sourcedeploy%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-ci-cd-%EB%AC%B4%EC%A4%91%EB%8B%A8-%EB%B0%B0%ED%8F%AC-%EA%B5%AC%EC%84%B1-ca1926e56c34)
+  * [Auto Scaling구성과 LoadBalance연결](https://ninekoo9.github.io/posts/ncp-infra-auto-scaling-load-balancer/)
+  * [Jenkins와 SourceDeploy을 이용한 CI/CD와 무중단 배포](https://ninekoo9.github.io/posts/ncp-infra-jenkins-cicd-sourcedeploy/)
 ## 프로토타입 화면
 ![nutri-diary-prototype](https://github.com/user-attachments/assets/ccbbc96a-027e-46e2-829e-f724056f5dff)
-
